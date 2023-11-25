@@ -3,7 +3,16 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.22" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.22" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ReceivableInfoApi.Common\ReceivableInfoApi.Common.csproj" />
+    </ItemGroup>
 
 </Project>

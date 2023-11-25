@@ -7,4 +7,13 @@
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ReceivableInfoApi.Common\ReceivableInfoApi.Common.csproj" />
+      <ProjectReference Include="..\ReceivableInfoApi.DataAccess\ReceivableInfoApi.DataAccess.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.22" />
+    </ItemGroup>
+
 </Project>

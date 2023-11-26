@@ -5,8 +5,8 @@ namespace ReceivableInfoApi.Common.Services;
 public interface IReceivableCRUDService
 {
     Task<bool> Create(Receivable receivable);
+    Task<bool> Update(Receivable receivable);
     Task<Receivable> Get(string reference);
     Task<Receivable[]> GetAll();
-    Task Update(Receivable receivable);
-    Task Delete(string reference);
+    Task<bool> Delete(string reference);
 }

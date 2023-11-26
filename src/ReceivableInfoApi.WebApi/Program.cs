@@ -1,5 +1,6 @@
 using ReceivableInfoApi.Common.Services;
 using ReceivableInfoApi.DataAccess;
+using ReceivableInfoApi.DataAccess.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>();
 
 builder.Services.AddScoped<IReceivableCRUDService, ReceivableCRUDService>();
+builder.Services.AddScoped<IReceivableStatisticsService, ReceivableStatisticsService>();
 
 var app = builder.Build();
 

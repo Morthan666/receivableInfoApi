@@ -2,7 +2,7 @@
 using ReceivableInfoApi.Common.Model;
 using ReceivableInfoApi.Common.Services;
 
-namespace ReceivableInfoApi.DataAccess;
+namespace ReceivableInfoApi.DataAccess.Services;
 
 public class ReceivableCRUDService  : IReceivableCRUDService
 {
@@ -19,25 +19,29 @@ public class ReceivableCRUDService  : IReceivableCRUDService
         var existing = await Get(receivable.Reference);
 
         if (existing is null) _dbContext.Receivables.Add(receivable);
-        else _dbContext.Receivables.Update(receivable);
         await _dbContext.SaveChangesAsync();
 
         return existing is null;
     }
-
-    public async Task Update(Receivable receivable)
+    
+    public async Task<bool> Update(Receivable receivable)
     {
-        _dbContext.Receivables.Update(receivable);
+        var existing = await Get(receivable.Reference);
 
+        if (existing is null) _dbContext.Receivables.Add(receivable);
+        else _dbContext.Receivables.Update(receivable);
         await _dbContext.SaveChangesAsync();
+
+        return existing is not null;
     }
 
-    public async Task Delete(string reference)
+    public async Task<bool> Delete(string reference)
     {
         var receivable = await Get(reference);
         
         if (receivable != null) _dbContext.Receivables.Remove(receivable);
-
         await _dbContext.SaveChangesAsync();
+
+        return receivable is not null;
     }
 }

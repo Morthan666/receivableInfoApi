@@ -2,6 +2,7 @@
 using System.Text.Json.Serialization;
 
 namespace ReceivableInfoApi.Common.Model;
+
 public class Receivable
 {
     [Key]
@@ -52,7 +53,7 @@ public class Receivable
     
     [JsonPropertyName("debtorCountryCode")]
     public string DebtorCountryCode { get; set; }
-    
+
     [JsonPropertyName("debtorRegistrationNumber")]
     public string? DebtorRegistrationNumber { get; set; }
 }

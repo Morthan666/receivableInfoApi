@@ -1,4 +1,3 @@
-using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using ReceivableInfoApi.Common.Model;
 using ReceivableInfoApi.Common.Services;
@@ -37,12 +36,12 @@ public class ReceivablesController : Controller
     /// <param name="reference"></param>
     /// <returns>Receivable</returns>
     [HttpGet("{reference}")]
-    public async Task<ActionResult<Receivable>> Get([FromRoute]string reference)
+    public async Task<ActionResult<Receivable>> Get([FromRoute] string reference)
     {
         _logger.LogInformation("Receivable {reference} requested", reference);
         return await _crudService.Get(reference);
     }
-    
+
     /// <summary>
     /// Create a new receivable
     /// </summary>
@@ -50,18 +49,18 @@ public class ReceivablesController : Controller
     /// <returns>Receivable</returns>
     [HttpPost]
     public async Task<ActionResult> Post(Receivable receivable)
-    { 
+    {
         var created = await _crudService.Create(receivable);
         if (created)
         {
             _logger.LogInformation("Receivable {reference} created", receivable.Reference);
             return new CreatedResult(receivable.Reference, receivable);
         }
-            
+
         _logger.LogInformation("Receivable {reference} exists", receivable.Reference);
         return this.SeeOther(receivable.Reference);
     }
-    
+
     /// <summary>
     /// Update a receivable
     /// </summary>
@@ -75,6 +74,7 @@ public class ReceivablesController : Controller
             _logger.LogInformation("Receivable {reference} updated", receivable.Reference);
             return Ok("Receivable updated");
         }
+
         _logger.LogInformation("Receivable {reference} created", receivable.Reference);
         return new CreatedResult(receivable.Reference, receivable);
     }
@@ -90,7 +90,7 @@ public class ReceivablesController : Controller
         _logger.LogInformation("Receivable {reference} deleted", reference);
         return Ok("Receivable deleted");
     }
-    
+
     /// <summary>
     /// Get the summary of open invoices value
     /// </summary>

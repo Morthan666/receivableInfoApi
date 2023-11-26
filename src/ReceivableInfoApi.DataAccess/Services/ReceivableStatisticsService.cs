@@ -5,7 +5,7 @@ namespace ReceivableInfoApi.DataAccess.Services;
 
 public class ReceivableStatisticsService : IReceivableStatisticsService
 {
-    private DataContext _dbContext;
+    private readonly DataContext _dbContext;
 
     public ReceivableStatisticsService(DataContext dbContext) => _dbContext = dbContext;
 

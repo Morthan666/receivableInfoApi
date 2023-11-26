@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using ReceivableInfoApi.Common.Model;
-using Microsoft.EntityFrameworkCore;
 
 namespace ReceivableInfoApi.DataAccess;
+
 public class DataContext : DbContext
 {
     protected readonly IConfiguration Configuration;

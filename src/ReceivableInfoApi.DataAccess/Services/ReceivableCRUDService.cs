@@ -4,7 +4,7 @@ using ReceivableInfoApi.Common.Services;
 
 namespace ReceivableInfoApi.DataAccess.Services;
 
-public class ReceivableCRUDService  : IReceivableCRUDService
+public class ReceivableCRUDService : IReceivableCRUDService
 {
     private DataContext _dbContext;
 
@@ -23,7 +23,7 @@ public class ReceivableCRUDService  : IReceivableCRUDService
 
         return existing is null;
     }
-    
+
     public async Task<bool> Update(Receivable receivable)
     {
         var existing = await Get(receivable.Reference);
@@ -38,7 +38,7 @@ public class ReceivableCRUDService  : IReceivableCRUDService
     public async Task<bool> Delete(string reference)
     {
         var receivable = await Get(reference);
-        
+
         if (receivable != null) _dbContext.Receivables.Remove(receivable);
         await _dbContext.SaveChangesAsync();
 

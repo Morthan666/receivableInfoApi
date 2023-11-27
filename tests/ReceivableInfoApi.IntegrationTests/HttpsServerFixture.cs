@@ -13,14 +13,12 @@ public class HttpServerFixture : WebApplicationFactory<Program>
 {
     private bool _disposed;
     private IHost? _host;
-    
+
     public HttpServerFixture()
     {
         ClientOptions.AllowAutoRedirect = false;
         ClientOptions.BaseAddress = new Uri("https://localhost");
     }
-
-    public HttpClient CreateHttpClient() => CreateDefaultClient();
 
     public string ServerAddress
     {
@@ -40,13 +38,15 @@ public class HttpServerFixture : WebApplicationFactory<Program>
         }
     }
 
+    public HttpClient CreateHttpClient() => CreateDefaultClient();
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         var connectionString = string.Empty;
 
         var config = new[]
         {
-            KeyValuePair.Create<string, string?>("ConnectionString", connectionString),
+            KeyValuePair.Create<string, string?>("ConnectionString", connectionString)
         };
 
         var configRoot = new ConfigurationBuilder()
@@ -54,7 +54,7 @@ public class HttpServerFixture : WebApplicationFactory<Program>
             .Build();
 
         builder.ConfigureAppConfiguration(configBuilder => configBuilder.AddInMemoryCollection(config));
-        
+
         builder.UseUrls("http://127.0.0.1:0");
     }
 
@@ -62,7 +62,7 @@ public class HttpServerFixture : WebApplicationFactory<Program>
     {
         var testHost = builder.Build();
 
-        builder.ConfigureWebHost((p) => p.UseKestrel());
+        builder.ConfigureWebHost(p => p.UseKestrel());
 
         _host = builder.Build();
         _host.Start();
@@ -71,7 +71,7 @@ public class HttpServerFixture : WebApplicationFactory<Program>
         var addresses = server.Features.Get<IServerAddressesFeature>();
 
         ClientOptions.BaseAddress = addresses!.Addresses
-            .Select((p) => new Uri(p))
+            .Select(p => new Uri(p))
             .Last();
 
         testHost.Start();
@@ -91,6 +91,9 @@ public class HttpServerFixture : WebApplicationFactory<Program>
 
     private void EnsureServer()
     {
-        if (_host is null) using (CreateDefaultClient()) { }
+        if (_host is null)
+            using (CreateDefaultClient())
+            {
+            }
     }
 }

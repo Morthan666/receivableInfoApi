@@ -10,7 +10,7 @@ public class DataContext : DbContext
 
     public DataContext(IConfiguration configuration) => Configuration = configuration;
 
-    protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseInMemoryDatabase("InMemoryDb");
-
     public DbSet<Receivable> Receivables { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseInMemoryDatabase("InMemoryDb");
 }

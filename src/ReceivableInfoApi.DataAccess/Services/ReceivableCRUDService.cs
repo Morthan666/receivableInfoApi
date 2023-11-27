@@ -6,7 +6,7 @@ namespace ReceivableInfoApi.DataAccess.Services;
 
 public class ReceivableCRUDService : IReceivableCRUDService
 {
-    private DataContext _dbContext;
+    private readonly DataContext _dbContext;
 
     public ReceivableCRUDService(DataContext dbContext) => _dbContext = dbContext;
 
@@ -14,7 +14,7 @@ public class ReceivableCRUDService : IReceivableCRUDService
         => await _dbContext.Receivables.AsNoTracking().SingleOrDefaultAsync(r => r.Reference.Equals(reference));
 
     public async Task<Receivable[]> GetAll() => await _dbContext.Receivables.ToArrayAsync();
-    
+
     public async Task<bool> Create(Receivable receivable)
     {
         var existing = await Get(receivable.Reference);

@@ -6,14 +6,23 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     </PropertyGroup>
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ReceivableInfoApi.Common\ReceivableInfoApi.Common.csproj"/>
-        <ProjectReference Include="..\ReceivableInfoApi.DataAccess\ReceivableInfoApi.DataAccess.csproj"/>
+        <ProjectReference Include="..\ReceivableInfoApi.Common\ReceivableInfoApi.Common.csproj" />
+        <ProjectReference Include="..\ReceivableInfoApi.DataAccess\ReceivableInfoApi.DataAccess.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.22"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.22" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\swagger-ui\index.html" />
     </ItemGroup>
 
 </Project>

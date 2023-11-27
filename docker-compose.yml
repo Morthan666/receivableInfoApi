@@ -9,18 +9,6 @@ services:
     networks:
       - local
   
-  postgres:
-    image: postgres
-    ports:
-      - "5433:5432"
-    expose:
-      - "5432"
-    networks:
-      - docker_network
-    environment:
-      POSTGRES_PASSWORD: example
-      POSTGRES_DB: receivablesdb-local
-
 networks:
   local:
     driver: bridge

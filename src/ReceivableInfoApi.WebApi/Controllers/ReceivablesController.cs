@@ -23,7 +23,7 @@ public class ReceivablesController : Controller
     }
 
     /// <summary>
-    ///     Get a receivable by reference
+    ///     Get all receivables
     /// </summary>
     /// <param name="reference"></param>
     /// <returns>Receivable</returns>

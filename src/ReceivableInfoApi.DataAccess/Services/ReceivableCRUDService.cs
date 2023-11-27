@@ -10,7 +10,8 @@ public class ReceivableCRUDService : IReceivableCRUDService
 
     public ReceivableCRUDService(DataContext dbContext) => _dbContext = dbContext;
 
-    public async Task<Receivable> Get(string reference) => await _dbContext.Receivables.SingleOrDefaultAsync(r => r.Reference.Equals(reference));
+    public async Task<Receivable?> Get(string reference)
+        => await _dbContext.Receivables.AsNoTracking().SingleOrDefaultAsync(r => r.Reference.Equals(reference));
 
     public async Task<Receivable[]> GetAll() => await _dbContext.Receivables.ToArrayAsync();
     

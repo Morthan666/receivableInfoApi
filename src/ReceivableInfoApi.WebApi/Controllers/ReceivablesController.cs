@@ -28,7 +28,11 @@ public class ReceivablesController : Controller
     /// <param name="reference"></param>
     /// <returns>Receivable</returns>
     [HttpGet]
-    public async Task<ActionResult<Receivable[]>> Get() => await _crudService.GetAll();
+    public async Task<ActionResult<Receivable[]>> Get()
+    {
+        var receivables = await _crudService.GetAll();
+        return !receivables.Any() ? NoContent() : receivables;
+    }
 
     /// <summary>
     /// Get a receivable by reference
@@ -39,7 +43,8 @@ public class ReceivablesController : Controller
     public async Task<ActionResult<Receivable>> Get([FromRoute] string reference)
     {
         _logger.LogInformation("Receivable {reference} requested", reference);
-        return await _crudService.Get(reference);
+        var receivable = await _crudService.Get(reference);
+        return receivable == null ? NoContent() : receivable;
     }
 
     /// <summary>
@@ -66,8 +71,10 @@ public class ReceivablesController : Controller
     /// </summary>
     /// <param name="reference"></param>
     [HttpPut("{reference}")]
-    public async Task<ActionResult> Put(Receivable receivable)
+    public async Task<ActionResult> Put([FromRoute] string reference, Receivable receivable)
     {
+        if (reference != receivable.Reference) return BadRequest("Receivable reference cannot be modified");
+        
         var updated = await _crudService.Update(receivable);
         if (updated)
         {
@@ -84,7 +91,7 @@ public class ReceivablesController : Controller
     /// </summary>
     /// <param name="reference"></param>
     [HttpDelete("{reference}")]
-    public async Task<ActionResult> Delete(string reference)
+    public async Task<ActionResult> Delete([FromRoute] string reference)
     {
         await _crudService.Delete(reference);
         _logger.LogInformation("Receivable {reference} deleted", reference);
@@ -95,10 +102,7 @@ public class ReceivablesController : Controller
     /// Get the summary of open invoices value
     /// </summary>
     [HttpGet("openValueSummary")]
-    public async Task<ActionResult<decimal>> GetOpenValueSummary()
-    {
-        return await _statisticsService.GetOpenValueSummary();
-    }
+    public async Task<ActionResult<decimal>> GetOpenValueSummary() => await _statisticsService.GetOpenValueSummary();
 
     /// <summary>
     /// Get the summary of closed invoices value

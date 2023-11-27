@@ -19,3 +19,10 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+namespace ReceivableInfoApi.WebApi
+{
+    public partial class Program
+    {
+    }
+}

@@ -10,8 +10,8 @@ public class ReceivableStatisticsService : IReceivableStatisticsService
     public ReceivableStatisticsService(DataContext dbContext) => _dbContext = dbContext;
 
     public async Task<decimal> GetClosedValueSummary()
-        => await _dbContext.Receivables.Where(r => r.ClosedDate != null).SumAsync(r => r.PaidValue);
+        => await _dbContext.Receivables.AsNoTracking().Where(r => r.ClosedDate != null).SumAsync(r => r.PaidValue);
 
     public async Task<decimal> GetOpenValueSummary()
-        => await _dbContext.Receivables.Where(r => r.ClosedDate == null).SumAsync(r => r.OpeningValue);
+        => await _dbContext.Receivables.AsNoTracking().Where(r => r.ClosedDate == null).SumAsync(r => r.OpeningValue);
 }

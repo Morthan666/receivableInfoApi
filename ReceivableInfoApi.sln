@@ -12,11 +12,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReceivableInfoApi.DataAcces
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{79008740-FB89-4E72-9B59-3CAC23B29A39}"
 	ProjectSection(SolutionItems) = preProject
-		.dockerignore = .dockerignore
 		.gitignore = .gitignore
 		docker-compose.yml = docker-compose.yml
-		Dockerfile = Dockerfile
 		README.md = README.md
+		.dockerignore = .dockerignore
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceivableInfoApi.IntegrationTests", "tests\ReceivableInfoApi.IntegrationTests\ReceivableInfoApi.IntegrationTests.csproj", "{4A650B8E-A3DD-46D6-B061-E182D314469B}"

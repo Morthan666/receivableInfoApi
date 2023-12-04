@@ -46,7 +46,7 @@ public class HttpServerFixture : WebApplicationFactory<Program>
 
         var config = new[]
         {
-            KeyValuePair.Create<string, string?>("ConnectionString", connectionString)
+            KeyValuePair.Create<string, string?>("ConnectionStrings:LocalDb", connectionString)
         };
 
         var configRoot = new ConfigurationBuilder()

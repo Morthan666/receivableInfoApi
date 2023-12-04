@@ -1,4 +1,5 @@
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using ReceivableInfoApi.Common.Services;
 using ReceivableInfoApi.DataAccess;
 using ReceivableInfoApi.DataAccess.Services;
@@ -20,14 +21,15 @@ builder.Services.AddSwaggerGen(c =>
         $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
 });
 
-
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+using var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+if (!context.Database.IsInMemory()) context.Database.Migrate();
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

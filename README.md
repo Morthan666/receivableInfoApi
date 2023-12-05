@@ -11,7 +11,7 @@ Before running this API, ensure you have the following installed:
 - [Docker Desktop](https://docs.docker.com/desktop/install/windows-install/)
 ## Getting Started
 
-To run this API on your local machine as a Docker container, follow these steps:
+To run this API on your local machine with a local database in a Docker container, follow these steps:
 
 1. Clone this repository.
 2. Navigate to the project directory.
@@ -19,6 +19,5 @@ To run this API on your local machine as a Docker container, follow these steps:
 4. Navigate to the project directory/src/ReceivableInfoApi.WebApi
 5. Run `dotnet restore` to restore the dependencies.
 6. Run `dotnet run` to start the server.
-
 
 Local database can be accessed using following connection string: `server=localhost;port=5433;database=receivableinfodb-local;uid=postgres;password=example`
